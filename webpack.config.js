@@ -1,13 +1,14 @@
 const path = require('path')
 const merge = require('webpack-merge')
 const HtmlPlugin = require('html-webpack-plugin')
+const WorkboxPlugin = require('workbox-webpack-plugin')
 
 const devConfig = require('./webpack.dev.config.js')
 const prodConfig = require('./webpack.prod.config.js')
 
 const srcDir = path.resolve(__dirname, 'src')
 const pubDir = path.resolve(__dirname, 'public')
-const swDir = path.resolve(srcDir, 'service-worker.js')
+const swDir = path.resolve(srcDir, 'service-worker', 'sw.js')
 
 const env = process.env.NODE_ENV
 
@@ -53,7 +54,9 @@ const mainConfig = {
         minifyCSS: true,
         minifyURLs: true
       }
-    })
+    }),
+
+    new WorkboxPlugin.InjectManifest({swSrc: swDir})
   ]
 }
 

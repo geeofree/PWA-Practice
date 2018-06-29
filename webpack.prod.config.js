@@ -1,3 +1,5 @@
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+
 module.exports = {
   devtool: 'eval',
 
@@ -12,5 +14,9 @@ module.exports = {
     },
 
     runtimeChunk: true
-  }
+  },
+
+  plugins: [
+    new CleanWebpackPlugin(['public'])
+  ]
 }
